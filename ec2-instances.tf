@@ -1,6 +1,6 @@
 provider "aws" {
     version = "~> 2.0"
-    region = "us-east-1"
+    region = "us-east-2"
   
 }
 
@@ -13,7 +13,7 @@ resource "aws_instance" "nginx-test" {
         Name = "nginx-${count.index}"
     }
 
-    vpc_security_group_ids = ["${aws_security_group.ssh-http-us-east-1.id}"]
+    vpc_security_group_ids = ["${aws_security_group.ssh-http-us-east-2.id}"]
 
 }
 

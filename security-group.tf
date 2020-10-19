@@ -1,4 +1,4 @@
-resource "aws_security_group" "ssh-http-us-east-1" {
+resource "aws_security_group" "ssh-http-us-east-2" {
   name        = "acesso-ssh-http"
   description = "acesso-ssh-http"
 
