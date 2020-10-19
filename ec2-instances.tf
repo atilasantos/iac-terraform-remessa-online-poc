@@ -13,7 +13,7 @@ resource "aws_instance" "nginx-test" {
         Name = "nginx-${count.index}"
     }
 
-    vpc_security_group_ids = ["${aws_security_group.ssh-http-us-east-1}"]
+    vpc_security_group_ids = ["${aws_security_group.ssh-http-us-east-1.id}"]
 
 }
 

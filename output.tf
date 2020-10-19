@@ -1,3 +1,3 @@
-output "ec2-instance" {
-  value = "${aws_instance.nginx-test.public_ip}"
+output "ec2-instance1" {
+  value = "${aws_instance.nginx-test}"
 }
