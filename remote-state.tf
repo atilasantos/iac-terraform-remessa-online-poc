@@ -1,10 +1,10 @@
 terraform {
-  backend "remote" {
-    hostname = "app.terraform.io"
-    organization = "atilaPocs"
+  backend "local" {}#{
+  #   hostname = "app.terraform.io"
+  #   organization = "atilaPocs"
 
-    workspaces {
-      name = "iac-terraform-remessa-online-poc"
-    }
-  }
+  #   workspaces {
+  #     name = "iac-terraform-remessa-online-poc"
+  #   }
+  # }
 }
