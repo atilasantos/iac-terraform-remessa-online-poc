@@ -1,3 +1,4 @@
-output "ec2-instance1" {
-  value = "${aws_instance.nginx-test}"
+output "elb" {
+  value = aws_elb.myapp-elb.dns_name
 }
+

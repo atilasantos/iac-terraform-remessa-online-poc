@@ -1,23 +1,26 @@
-variable "amis" {
-    type = "map"
-
-    default = {
-        "nginx-ami" = "ami-07a027b7e4a98480b"
-    }
+variable "AWS_REGION" {
+  default = "us-east-2"
 }
 
-variable "instance_type" {
-    default = "t2.micro"
-  
+variable "PATH_TO_PRIVATE_KEY" {
+  default = "mykey"
 }
 
-variable "key_name" {
-    default = "rsa_key"
-
+variable "PATH_TO_PUBLIC_KEY" {
+  default = "mykey.pub"
 }
 
-variable "my_ip" {
-    type = "list"
-    default = ["45.232.198.120/32"]
-  
+variable "ECS_INSTANCE_TYPE" {
+  default = "t2.micro"
 }
+
+variable "ECS_AMIS" {
+  type = map(string)
+  default = {
+    us-east-2 = "ami-09e6907b7bcde92d5"
+    us-west-2 = "ami-56ed4936"
+    eu-west-1 = "ami-c8337dbb"
+  }
+}
+
+# Full List: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
