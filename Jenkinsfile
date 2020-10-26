@@ -13,7 +13,6 @@ try {
   stage('Initializing Terraform!') {
     node {
       withCredentials([[
-        sh 'terraform --version'
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
