@@ -1,14 +1,5 @@
 // Jenkinsfile
-String credentialsId = 'awsCredentials'(
-
-def setAwsCredentials() {
-  withCredentials([[
-    $class: 'AmazonWebServicesCredentialsBinding',
-    credentialsId: credentialsId,
-    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-    ]])
-}
+String credentialsId = 'awsCredentials'
 
 try {
   stage('checkout') {
@@ -21,8 +12,13 @@ try {
   // Run terraform init
   stage('Initializing Terraform!') {
     node {
-      sh 'terraform --version'
-      setAwsCredentials(){
+      withCredentials([[
+        sh 'terraform --version'
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: credentialsId,
+        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+      ]]) {
         ansiColor('xterm') {
           sh 'terraform init'
         }
@@ -31,9 +27,14 @@ try {
   }
 
   // Run terraform plan
-  stage('Planning terraform execution') {
+  stage('plan') {
     node {
-     setAwsCredentials() {
+      withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: credentialsId,
+        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+      ]]) {
         ansiColor('xterm') {
           sh 'terraform plan'
         }
@@ -46,7 +47,12 @@ try {
     // Run terraform apply
     stage('apply') {
       node {
-        setAwsCredentials() {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: credentialsId,
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
           ansiColor('xterm') {
             sh 'terraform apply -auto-approve'
           }
@@ -57,7 +63,12 @@ try {
     // Run terraform show
     stage('show') {
       node {
-       setAwsCredentials() {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: credentialsId,
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
           ansiColor('xterm') {
             sh 'terraform show'
           }
