@@ -1,4 +1,3 @@
-output "elb" {
-  value = aws_elb.myapp-elb.dns_name
+output "dns_name" {
+  value = "${module.elb.elb_dns_name}"
 }
-
