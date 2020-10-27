@@ -26,21 +26,22 @@ try {
   }
 
   stage('Validating wether destroy or apply..') {
+    echo env.DESTROY
     if(env.DESTROY == true) {
       node {
-      withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]]) {
-        ansiColor('xterm') {
-          sh '/tmp/terraform destroy -auto-approve'
-          currentBuild.result = 'SUCCESS'
-          return
-        }
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          credentialsId: credentialsId,
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
+              ansiColor('xterm') {
+                sh '/tmp/terraform destroy -auto-approve'
+                currentBuild.result = 'SUCCESS'
+                return
+              }
+            }
       }
-    }
     } else {
         echo "Let's go apply!"
       }  
