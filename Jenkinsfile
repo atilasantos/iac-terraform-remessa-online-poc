@@ -19,7 +19,7 @@ try {
         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
       ]]) {
         ansiColor('xterm') {
-          sh 'terraform init'
+          sh '/tmp/terraform init'
         }
       }
     }
@@ -35,13 +35,13 @@ try {
         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
       ]]) {
         ansiColor('xterm') {
-          sh 'terraform plan'
+          sh '/tmp/terraform plan'
         }
       }
     }
   }
 
-  if (env.BRANCH_NAME == 'master') {
+  if (env.BRANCH_NAME == 'main') {
 
     // Run terraform apply
     stage('apply') {
@@ -53,7 +53,7 @@ try {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           ansiColor('xterm') {
-            sh 'terraform apply -auto-approve'
+            sh '/tmp/terraform apply -auto-approve'
           }
         }
       }
@@ -69,7 +69,7 @@ try {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           ansiColor('xterm') {
-            sh 'terraform show'
+            sh '/tmp/terraform show'
           }
         }
       }
