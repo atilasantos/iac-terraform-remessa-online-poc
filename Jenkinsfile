@@ -1,7 +1,6 @@
 // Jenkinsfile
-String credentialsId = 'awsCredentials'
-
 def setAwsCredentials() {
+  String credentialsId = 'awsCredentials'
   withCredentials([[
     $class: 'AmazonWebServicesCredentialsBinding',
     credentialsId: credentialsId,
