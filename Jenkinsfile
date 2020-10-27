@@ -41,6 +41,7 @@ try {
     }
   }
 
+  echo env.BRANCH_NAME
   if (env.BRANCH_NAME == 'main') {
 
     // Run terraform apply
