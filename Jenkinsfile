@@ -26,6 +26,7 @@ try {
   }
 
   stage('Validating wether destroy or apply..') {
+    echo env.DESTROY
     if(env.DESTROY == true) {
       ansiColor('xterm') {
         sh '/tmp/terraform destroy -auto-approve'
