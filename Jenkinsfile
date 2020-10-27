@@ -40,8 +40,8 @@ try {
       }
     }
   }
-
-  if (env.BRANCH_NAME == 'main') {
+echo "env.BRANCH_NAME"
+  if (env.BRANCH_NAME == 'master') {
 
     // Run terraform apply
     stage('Applying changes!') {
