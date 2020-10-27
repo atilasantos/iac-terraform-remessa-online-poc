@@ -7,11 +7,7 @@ def setAwsCredentials() {
     credentialsId: credentialsId,
     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-  ]]) {
-    ansiColor('xterm') {
-      sh '/tmp/terraform init'
-    }
-  }
+  ]])
 }
 
 try {
@@ -26,6 +22,9 @@ try {
   stage('Initializing terraform..') {
     node {
       setAwsCredentials()
+      ansiColor('xterm') {
+      sh '/tmp/terraform init'
+      }
     }
   }
 
