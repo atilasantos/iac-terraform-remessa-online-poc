@@ -10,11 +10,7 @@ try {
   }
 
   // Run terraform init
-  stage('init') {
-    echo 'Creating mykey key pair..'
-    sh "ssh-keygen -f mykey -q -N ''"
-    echo 'Creating tfvars file...'
-    sh "echo "KEY_VALUE="`cat mykey.pub`"" > terraform.tfvars"
+  stage('Initializing terraform..') {
     node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
@@ -30,7 +26,7 @@ try {
   }
 
   // Run terraform plan
-  stage('plan') {
+  stage('Planning to execute terraform..') {
     node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
@@ -48,7 +44,7 @@ try {
   if (env.BRANCH_NAME == 'main') {
 
     // Run terraform apply
-    stage('apply') {
+    stage('Applying changes!') {
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
