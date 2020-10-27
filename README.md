@@ -24,7 +24,7 @@ Obs: This README.md file was written focused to Linux users, may other OS system
 1. Install the [aws cli](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/install-cliv2.html "Installing aws cli"), try execute ***aws --version*** right after the instalation, something like the snippet below must be displayed:
 
     ``aws-cli/2.0.56 Python/3.7.3 Linux/5.4.0-51-generic exe/x86_64.ubuntu.18``
-2. [Associate our AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html "Configure aws credentials") to our local aws CLI so terraform would be able to identify what credentials to use while provisioning IAC on aws provider.
+2. [Associate AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html "Configure aws credentials") to our local aws CLI so terraform would be able to identify what credentials to use while provisioning IAC on aws provider.
 
 3. In order to set the right key-pair to get logged into the EC2 instance, clone this repository and inside the root folder, execute:
 ```shell
@@ -36,7 +36,7 @@ sed -i "6i \ \ default = \"$key\"" mainvars.tf;
 ```
 
 ## Terraform files
-This repository is responsible for provisioning the aimed infrastructure, however it uses a modulerized structure provided by another [repository](https://github.com/atilasantos/iac-terraform-modules-remessa-online-poc.git) also written by me, in this section i'll go over the files which belongs to this repo.
+This repository is responsible for provisioning the aimed infrastructure, however it uses a modularized structure provided by another [repository](https://github.com/atilasantos/iac-terraform-modules-remessa-online-poc.git) also written by me, in this section i'll go over the files which belongs to this repo.
 -  [backend.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/backend.tf): Define a remote versioned backend using S3 bucket service. The S3 bucket must be created before initializing terraform.
 - [main.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/main.tf): Define how to create the cluster by providing the required variables from all the necessary modules.
 - [mainvars.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/mainvars.tf): Define 'global' variables used by terraform.
@@ -68,7 +68,7 @@ Once the apply is executed, and a ELB_DNS_NAME was provided, execute:
 
 Where ELB_DNS_NAME is the name provided as output in the apply.
 ```
-The script will keep running until nginx instance up, once this condition is reached, the script will open a Chrome tab with the nginx front-end.
+The script will keep running until nginx instance is up, once this condition is reached, the script will open a Chrome tab with the nginx front-end.
 Bellow the output example:
 ```shell
  ELB not resolved.. 
@@ -84,5 +84,5 @@ Once the validation is ok, execute:
 terraform destroy -auto-approve
 ```
 
-## Any question?
+## Any questions?
 Feel free to contact me via atila.romao@hotmail.com
