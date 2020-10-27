@@ -35,11 +35,12 @@ try {
         sh '/tmp/terraform destroy -auto-approve'
         currentBuild.result = 'SUCCESS'
         return
-      } else {
+      } 
+    } else {
         echo "Let's go apply!"
-      }
+      }  
     }
-  }
+  
 
   // Run terraform plan
   stage('Planning to execute terraform..') {
