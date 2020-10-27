@@ -12,9 +12,9 @@ try {
   // Run terraform init
   stage('init') {
     echo 'Creating mykey key pair..'
-    sh 'ssh-keygen -f mykey -q -N ""'
+    sh "ssh-keygen -f mykey -q -N ''"
     echo 'Creating tfvars file...'
-    sh 'echo "KEY_VALUE="`cat mykey.pub`"" > terraform.tfvars'
+    sh "echo "KEY_VALUE="`cat mykey.pub`"" > terraform.tfvars"
     node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
