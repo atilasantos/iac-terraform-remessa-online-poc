@@ -15,9 +15,10 @@ Obs: This README.md file was written focused to Linux users, may other OS system
     ```
     wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip ;
     unzip terraform_0.13.0_linux_amd64.zip;
+    chmod +x terraform;
     sudo mv terraform /usr/local/bin
     ```
-- Create a S3 Bucket (fix the name if necessary in [backend.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/backend.tf))
+- Create a [S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html "Create a S3 Bucket") service on AWS (fix the name if necessary in [backend.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/backend.tf))
 - Create an ECR registry and push the nginx image to that as the [following](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) article.
 
 ## Getting started 🚀
@@ -36,7 +37,7 @@ sed -i "6i \ \ default = \"$key\"" mainvars.tf;
 ```
 
 ## Terraform files
-This repository is responsible for provisioning the aimed infrastructure, however it uses a modularized structure provided by another [repository](https://github.com/atilasantos/iac-terraform-modules-remessa-online-poc.git) also written by me, in this section i'll go over the files which belongs to this repo.
+This repository is responsible for provisioning the aimed infrastructure, however it uses a modularized structure provided by another [repository](https://github.com/atilasantos/iac-terraform-modules-remessa-online-poc.git) also written by me, in this section i'll go through the files which belongs to this repo.
 -  [backend.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/backend.tf): Define a remote versioned backend using S3 bucket service. The S3 bucket must be created before initializing terraform.
 - [main.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/main.tf): Define how to create the cluster by providing the required variables from all the necessary modules.
 - [mainvars.tf](https://github.com/atilasantos/iac-terraform-remessa-online-poc/blob/main/mainvars.tf): Define 'global' variables used by terraform.
