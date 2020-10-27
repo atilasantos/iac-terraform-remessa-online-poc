@@ -1,17 +1,8 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
-try {
-  stage('checkout') {
-    node {
-      cleanWs()
-      checkout scm
-    }
-  }
-  
-  // Run terraform init
-  stage('Initializing terraform..') {
-    node {
+def setAwsCredentials() {
+  node {
       withCredentials([[
         $class: 'AmazonWebServicesCredentialsBinding',
         credentialsId: credentialsId,
@@ -22,7 +13,20 @@ try {
           sh '/tmp/terraform init'
         }
       }
+  }
+}
+
+try {
+  stage('checkout') {
+    node {
+      cleanWs()
+      checkout scm
     }
+  }
+  
+  // Run terraform init
+  stage('Initializing terraform..') {
+    setAwsCredentials()
   }
 
   stage('Validating wether destroy or apply..') {
