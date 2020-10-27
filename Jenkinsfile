@@ -29,7 +29,7 @@ try {
   }
 
   stage('Validating wether destroy or apply..') {
-    commitMessage = sh(script: "git log -1 --pretty=format:'%B'", returnStdout: true)
+    commitMessage = sh("git log -1 --pretty=format:'%B'")
     if(commitMessage.contains('#destroy')) {
       ansiColor('xterm') {
         sh '/tmp/terraform destroy -auto-approve'
