@@ -40,8 +40,8 @@ try {
       }
     }
   }
-echo "env.BRANCH_NAME"
-  if (env.BRANCH_NAME == 'master') {
+  echo "${env.BRANCH_NAME}"
+  if (${env.BRANCH_NAME} == 'master') {
 
     // Run terraform apply
     stage('Applying changes!') {
