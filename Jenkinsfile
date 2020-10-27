@@ -1,9 +1,6 @@
 // Jenkinsfile
 String credentialsId = 'awsCredentials'
 
-def commitMessage;
-
-
 try {
   stage('checkout') {
     node {
@@ -29,8 +26,7 @@ try {
   }
 
   stage('Validating wether destroy or apply..') {
-    commitMessage = sh("git log -1 --pretty=format:'%B'")
-    if(commitMessage.contains('#destroy')) {
+    if(env.DESTROY == true) {
       ansiColor('xterm') {
         sh '/tmp/terraform destroy -auto-approve'
         currentBuild.result = 'SUCCESS'
