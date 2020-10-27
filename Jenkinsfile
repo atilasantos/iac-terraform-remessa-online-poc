@@ -2,17 +2,15 @@
 String credentialsId = 'awsCredentials'
 
 def setAwsCredentials() {
-  node {
-      withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]]) {
-        ansiColor('xterm') {
-          sh '/tmp/terraform init'
-        }
-      }
+  withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: credentialsId,
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+  ]]) {
+    ansiColor('xterm') {
+      sh '/tmp/terraform init'
+    }
   }
 }
 
@@ -26,7 +24,9 @@ try {
   
   // Run terraform init
   stage('Initializing terraform..') {
-    setAwsCredentials()
+    node {
+      setAwsCredentials()
+    }
   }
 
   stage('Validating wether destroy or apply..') {
