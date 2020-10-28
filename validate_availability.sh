@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ -z $1 ]
+then 
+  echo -e "\e[1;31m ELB_DNS_NAME not passed as a parameter! \e[0m"
+  exit
+fi
 
 command=`curl $1`
 while [ -z "${command}" ]; do
