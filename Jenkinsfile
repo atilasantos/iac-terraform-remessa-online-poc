@@ -24,11 +24,9 @@ try {
       }
     }
   }
-  echo env.DESTROY
-  //Validar p
-  if(env.DESTROY == 'sim') {
+  //Check why a boolean variable wasn't working
+  if(env.DESTROY == 'Sim') {
     stage('Initializing destroy.') {
-      echo "entrei"
       node {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -39,10 +37,11 @@ try {
           ansiColor('xterm') {
             sh '/tmp/terraform destroy -auto-approve'
             currentBuild.result = 'SUCCESS'
-            exit 0
+            
           }
         }
-      } 
+      }
+      return
     }
   }
   
