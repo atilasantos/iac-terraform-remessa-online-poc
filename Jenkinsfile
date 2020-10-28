@@ -25,10 +25,10 @@ try {
     }
   }
 
-  stage('Validating wether destroy or apply..') {
-    node {
-      echo env.DESTROY
-      if(env.DESTROY == true) {
+  if(env.DESTROY == true) {
+    stage('Validating wether destroy or apply..') {
+      node {
+        echo "entrei"
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
@@ -41,11 +41,9 @@ try {
                 return
               }
             }
-    } else {
-        echo "Let's go apply!"
-      }
       }  
     }
+  }
   
 
   // Run terraform plan
