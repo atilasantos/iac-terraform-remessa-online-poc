@@ -26,9 +26,9 @@ try {
   }
 
   stage('Validating wether destroy or apply..') {
-    echo env.DESTROY
-    if(env.DESTROY == true) {
-      node {
+    node {
+      echo env.DESTROY
+      if(env.DESTROY == true) {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
@@ -41,9 +41,9 @@ try {
                 return
               }
             }
-      }
     } else {
         echo "Let's go apply!"
+      }
       }  
     }
   
