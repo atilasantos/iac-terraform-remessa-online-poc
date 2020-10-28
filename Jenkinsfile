@@ -24,23 +24,23 @@ try {
       }
     }
   }
-
+  echo env.DESTROY
   if(env.DESTROY == true) {
-    stage('Validating wether destroy or apply..') {
+    stage('Initializing destroy.') {
+      echo "entrei"
       node {
-        echo "entrei"
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: credentialsId,
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
-              ansiColor('xterm') {
-                sh '/tmp/terraform destroy -auto-approve'
-                currentBuild.result = 'SUCCESS'
-                return
-              }
-            }
+          ansiColor('xterm') {
+            sh '/tmp/terraform destroy -auto-approve'
+            currentBuild.result = 'SUCCESS'
+            return
+          }
+        }
       }  
     }
   }
