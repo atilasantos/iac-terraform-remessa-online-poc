@@ -25,6 +25,7 @@ try {
     }
   }
   echo env.DESTROY
+  //Validar p
   if(env.DESTROY == 'sim') {
     stage('Initializing destroy.') {
       echo "entrei"
@@ -38,10 +39,10 @@ try {
           ansiColor('xterm') {
             sh '/tmp/terraform destroy -auto-approve'
             currentBuild.result = 'SUCCESS'
-            return
+            exit 0
           }
         }
-      }  
+      } 
     }
   }
   
