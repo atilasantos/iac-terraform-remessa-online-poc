@@ -25,7 +25,7 @@ try {
     }
   }
   echo env.DESTROY
-  if(env.DESTROY == true) {
+  if(env.DESTROY == 'sim') {
     stage('Initializing destroy.') {
       echo "entrei"
       node {
