@@ -1,7 +1,10 @@
 node {
   // Jenkinsfile
   String credentialsId = 'awsCredentials'
-
+  
+  parameters {
+        string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+  }
   environment {
         AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
