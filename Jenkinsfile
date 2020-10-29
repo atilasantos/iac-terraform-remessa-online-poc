@@ -41,7 +41,7 @@ try {
           }
         }
       }
-      exit 0
+      return
     }
   }
   
