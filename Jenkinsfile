@@ -14,25 +14,19 @@ node {
             sh '/tmp/terraform init'
           }
       }
-    }
-    //Check why a boolean variable wasn't working
-    if(env.DESTROY == 'Sim') {
-      stage('Initializing destroy.') {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: credentialsId,
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
+
+      if(env.DESTROY == 'Sim') {
+        stage('Initializing destroy.') {
           ansiColor('xterm') {
             sh '/tmp/terraform destroy -auto-approve'
             currentBuild.result = 'SUCCESS'
-            
           }
         }
+        return
       }
-      return
     }
+    //Check why a boolean variable wasn't working
+
     
 
     // Run terraform plan
