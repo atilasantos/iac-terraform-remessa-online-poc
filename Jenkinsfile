@@ -17,22 +17,18 @@ node {
     
     // Run terraform init
     stage('Initializing terraform..') {
-      {
         ansiColor('xterm') {
           sh '/tmp/terraform init'
         }
-      }
     }
 
     //Check why a boolean variable wasn't working
     if(env.DESTROY == 'Sim') {
       stage('Initializing destroy.') {
-        {
           ansiColor('xterm') {
             sh '/tmp/terraform destroy -auto-approve'
             currentBuild.result = 'SUCCESS'  
           }
-        }
       }
       return
     }
@@ -40,30 +36,24 @@ node {
 
     // Run terraform plan
     stage('Planning to execute terraform..') {
-      {
         ansiColor('xterm') {
           sh '/tmp/terraform plan'
         }
-      }
     }
 
     if (env.BRANCH_NAME == 'main') {
       // Run terraform apply
       stage('Applying changes!') {
-        {
           ansiColor('xterm') {
             sh '/tmp/terraform apply -auto-approve'
           }
-        }
       }
 
       // Run terraform show
       stage('show') {
-        {
           ansiColor('xterm') {
             sh '/tmp/terraform show'
           }
-        }
       }
     }
     currentBuild.result = 'SUCCESS'
