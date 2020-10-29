@@ -88,8 +88,8 @@ node {
         }
       }
     }
-    }
     currentBuild.result = 'SUCCESS'
+    }
     catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
     currentBuild.result = 'ABORTED'
     }
