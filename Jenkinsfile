@@ -8,20 +8,13 @@ node {
         checkout scm
     }
     
-    // Run terraform init
-    stage('Initializing terraform..') {
-      withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]]) {
-        ansiColor('xterm') {
-          sh '/tmp/terraform init'
-        }
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: credentialsId,accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
+      stage('Initializing terraform..') {
+          ansiColor('xterm') {
+            sh '/tmp/terraform init'
+          }
       }
     }
-
     //Check why a boolean variable wasn't working
     if(env.DESTROY == 'Sim') {
       stage('Initializing destroy.') {
