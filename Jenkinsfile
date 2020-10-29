@@ -7,7 +7,7 @@ node {
         credentialsId: credentialsId,
         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]])
+      ]]){}
   }
 
   try {
@@ -18,8 +18,8 @@ node {
     
     // Run terraform init
     stage('Initializing terraform..') {
-       {credentialsAws()}
-       {
+      credentialsAws()
+      {
         ansiColor('xterm') {
           sh '/tmp/terraform init'
         }
