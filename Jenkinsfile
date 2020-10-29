@@ -1,14 +1,14 @@
 node {
   // Jenkinsfile
   String credentialsId = 'awsCredentials'
-  
-  parameters {
-        string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+  def credentialsAws(){
+    withCredentials([[
+        $class: 'AmazonWebServicesCredentialsBinding',
+        credentialsId: credentialsId,
+        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+      ]])
   }
-  environment {
-        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
-    }
 
   try {
     stage('Checkout into main branch') {
@@ -18,8 +18,11 @@ node {
     
     // Run terraform init
     stage('Initializing terraform..') {
-      ansiColor('xterm') {
-        sh '/tmp/terraform init'
+       {credentialsAws()}
+       {
+        ansiColor('xterm') {
+          sh '/tmp/terraform init'
+        }
       }
     }
 
