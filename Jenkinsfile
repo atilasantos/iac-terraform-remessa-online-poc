@@ -2,7 +2,7 @@ node {
   // Jenkinsfile
   String credentialsId = 'awsCredentials'
 
-  stages {
+  stage('Pipeline iniciado') {
     try {
     stage('Checkout into main branch') {
         cleanWs()
