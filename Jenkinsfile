@@ -1,14 +1,15 @@
+String credentialsId = 'awsCredentials'
+def credentialsAws(){
+  withCredentials([[
+      $class: 'AmazonWebServicesCredentialsBinding',
+      credentialsId: credentialsId,
+      accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+    ]])
+}
+
 node {
   // Jenkinsfile
-  String credentialsId = 'awsCredentials'
-  def credentialsAws(){
-    withCredentials([[
-        $class: 'AmazonWebServicesCredentialsBinding',
-        credentialsId: credentialsId,
-        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-      ]])
-  }
 
   try {
     stage('Checkout into main branch') {
